@@ -1,0 +1,27 @@
+﻿<Window x:Class="FootballEstimate.View.EditLeagueAndSeasonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FootballEstimate.View"
+        mc:Ignorable="d"
+        Title="Add League And Season" Height="251.103" Width="400">
+    <Grid Name="Grid" DataContext="{Binding LeagueAndSeasonForDesign, Source={StaticResource Locator}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="149*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="labelLeagueKey" Content="League Key*" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxLeagueKey" Text="{Binding LeagueKey, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Grid.Column="1"/>
+        <Label x:Name="labelLeagueName" Content="League Name" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxLeagueName" Text="{Binding LeagueName, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="10,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Grid.Column="1"/>
+        <Label x:Name="labelSeasonKey" Content="Season Key*" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxSeasonKey" Text="{Binding SeasonKey, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="10,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Grid.Column="1"/>
+        <Label x:Name="labelSeasonName" Content="Season Name" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxSeasonName" Text="{Binding SeasonName, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="10,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Grid.Column="1"/>
+
+        <Button x:Name="buttonOK" Content="OK" IsDefault="True" Command="{Binding OkCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Grid.Column="1" HorizontalAlignment="Left" Height="39" Margin="163,172,0,0" VerticalAlignment="Top" Width="55"/>
+        <Button x:Name="buttonCancel" Content="Cancel" IsCancel="True" Grid.Column="1" HorizontalAlignment="Left" Height="39" Margin="233,172,0,0" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.399,-0.753"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" targetNamespace="http://schemas.datacontract.org/2004/07/OLDB.Spa.Models.Api" xmlns:mstns="http://schemas.datacontract.org/2004/07/OLDB.Spa.Models.Api" xmlns="http://schemas.datacontract.org/2004/07/OLDB.Spa.Models.Api" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:element name="Group">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GroupID" type="xs:string" minOccurs="0" />
+        <xs:element name="GroupName" type="xs:string" minOccurs="0" />
+        <xs:element name="GroupOrderID" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="Group" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

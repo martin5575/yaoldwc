@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" targetNamespace="http://schemas.datacontract.org/2004/07/OLDB.Spa.Models.Api" xmlns:mstns="http://schemas.datacontract.org/2004/07/OLDB.Spa.Models.Api" xmlns="http://schemas.datacontract.org/2004/07/OLDB.Spa.Models.Api" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:element name="Match">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Goals" type="xs:string" minOccurs="0" />
+        <xs:element name="Group" type="xs:string" minOccurs="0" />
+        <xs:element name="LastUpdateDateTime" type="xs:string" minOccurs="0" />
+        <xs:element name="LeagueId" type="xs:string" minOccurs="0" />
+        <xs:element name="Location" type="xs:string" minOccurs="0" />
+        <xs:element name="MatchDateTime" type="xs:string" minOccurs="0" />
+        <xs:element name="MatchDateTimeUTC" type="xs:string" minOccurs="0" />
+        <xs:element name="MatchID" type="xs:string" minOccurs="0" />
+        <xs:element name="MatchIsFinished" type="xs:string" minOccurs="0" />
+        <xs:element name="MatchResults" type="xs:string" minOccurs="0" />
+        <xs:element name="NumberOfViewers" type="xs:string" minOccurs="0" />
+        <xs:element name="Team1" type="xs:string" minOccurs="0" />
+        <xs:element name="Team2" type="xs:string" minOccurs="0" />
+        <xs:element name="TimeZoneID" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="Match" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
