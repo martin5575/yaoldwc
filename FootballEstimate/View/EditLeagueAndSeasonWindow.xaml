@@ -5,23 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootballEstimate.View"
         mc:Ignorable="d"
-        Title="Add League And Season" Height="251.103" Width="400">
+        Title="Add League And Season" Height="165" Width="460"
+        WindowStyle="SingleBorderWindow" Background="White">
     <Grid Name="Grid" DataContext="{Binding LeagueAndSeasonForDesign, Source={StaticResource Locator}}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="47*"/>
-            <ColumnDefinition Width="149*"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="labelLeagueKey" Content="League Key*" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxLeagueKey" Text="{Binding LeagueKey, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Grid.Column="1"/>
-        <Label x:Name="labelLeagueName" Content="League Name" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxLeagueName" Text="{Binding LeagueName, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="10,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Grid.Column="1"/>
-        <Label x:Name="labelSeasonKey" Content="Season Key*" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxSeasonKey" Text="{Binding SeasonKey, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="10,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Grid.Column="1"/>
-        <Label x:Name="labelSeasonName" Content="Season Name" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxSeasonName" Text="{Binding SeasonName, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="10,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Grid.Column="1"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="labelLeague" Content="League" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Black"/>
+        <Label x:Name="labelLeagueKey" Content="Key*" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="textBoxLeagueKey" Grid.Column="2" Grid.Row="0" Text="{Binding LeagueKey, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" />
+        <Label x:Name="labelLeagueName" Content="Name" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBox x:Name="textBoxLeagueName" Grid.Column="4" Grid.Row="0" Text="{Binding LeagueName, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" />
+        <Label x:Name="labelSeason" Content="Season" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Black"/>
+        <Label x:Name="labelSeasonKey" Content="Key*" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="textBoxSeasonKey" Grid.Column="2" Grid.Row="1" Text="{Binding SeasonKey, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" />
+        <Label x:Name="labelSeasonName" Content="Name" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxSeasonName" Text="{Binding SeasonName, Mode=TwoWay}" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" />
 
-        <Button x:Name="buttonOK" Content="OK" IsDefault="True" Command="{Binding OkCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Grid.Column="1" HorizontalAlignment="Left" Height="39" Margin="163,172,0,0" VerticalAlignment="Top" Width="55"/>
-        <Button x:Name="buttonCancel" Content="Cancel" IsCancel="True" Grid.Column="1" HorizontalAlignment="Left" Height="39" Margin="233,172,0,0" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.399,-0.753"/>
+        <Button x:Name="buttonOK" Content="OK" IsDefault="True" Command="{Binding OkCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+                Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Width="70" Margin="0,0,75,0"/>
+        <Button x:Name="buttonCancel" Content="Cancel" IsCancel="True" 
+                Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Width="70" />
 
     </Grid>
 </Window>

@@ -7,7 +7,8 @@
         xmlns:converter="clr-namespace:FootballEstimate.ValueConverter"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        WindowStyle="ToolWindow" Background="White">
     
     <Window.Resources>
         <Style  TargetType="{x:Type ListBoxItem}">
@@ -32,24 +33,21 @@
                 <Grid Background="#FFE5E5E5">
                     <ComboBox ItemsSource="{Binding Leagues}" SelectedItem="{Binding SelectedLeague}" 
                               DisplayMemberPath="LongDisplayName"
-                  Height="22" Margin="5,5,100,0" VerticalAlignment="Top" HorizontalAlignment="Stretch"
-                              >
+                  Height="22" Margin="5,5,140,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                     </ComboBox>
                     <Button x:Name="buttonAdd" Content="+" Command="{Binding AddSeason}"
-        	            HorizontalAlignment="Right" Margin="0,5,80,0" VerticalAlignment="Top" Width="20"/>
+        	            HorizontalAlignment="Right" Margin="0,5,120,0" VerticalAlignment="Top" Width="20"/>
                     <Button x:Name="buttonRemove" Content="-" Command="{Binding RemoveSeason}"
-        	            HorizontalAlignment="Right" Margin="0,5,60,0" VerticalAlignment="Top" Width="20"/>
+        	            HorizontalAlignment="Right" Margin="0,5,100,0" VerticalAlignment="Top" Width="20"/>
                     <Button x:Name="buttonEdit" Content="..." Command="{Binding EditSeason}"
-        	            HorizontalAlignment="Right" Margin="0,5,40,0" VerticalAlignment="Top" Width="20"/>
+        	            HorizontalAlignment="Right" Margin="0,5,80,0" VerticalAlignment="Top" Width="20"/>
                     <Button x:Name="buttonOpen" Content="Open" Command="{Binding OpenSeason}"
-        	            HorizontalAlignment="Right" Margin="0,5,0,0" VerticalAlignment="Top" Width="40"/>
+        	            HorizontalAlignment="Right" Margin="0,5,40,0" VerticalAlignment="Top" Width="40"/>
+                    <Button x:Name="buttonTeams" Content="Refresh" Command="{Binding LoadTeams}"
+                        HorizontalAlignment="Right" Margin="0,5,0,0" VerticalAlignment="Top" Width="40"/>
 
-
-                    <Button x:Name="buttonTeams" Content="Teams" 
-                Command="{Binding LoadTeams}"
-                HorizontalAlignment="Left" Margin="5,32,0,0" VerticalAlignment="Top" Width="75"/>
                     <ListBox x:Name="listBoxTeams"
-                         HorizontalAlignment="Stretch" Margin="5,59,0,0" 
+                         HorizontalAlignment="Stretch" Margin="5,40,0,0" 
                          VerticalAlignment="Stretch" 
                          ItemsSource="{Binding Teams}"
                               AlternationCount="2">
@@ -69,4 +67,5 @@
             </TabItem>
         </TabControl>
     </Grid>
+    
 </Window>

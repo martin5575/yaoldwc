@@ -18,6 +18,18 @@ namespace FootballEstimate.Model
 
         public string GetIconSource(Team team)
         {
+            try
+            {
+                return GetIconSourceIntern(team);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        private string GetIconSourceIntern(Team team)
+        {
             var fileName = $"{team.TeamId}{Path.GetExtension(team.TeamIconUrl)}";
             string path = Path.Combine(Environment.CurrentDirectory, Constants.IconFolder);
             string fullPath = Path.Combine(path, fileName);

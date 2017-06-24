@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System;
 using FootballEstimate.View;
+using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 namespace FootballEstimate.ViewModel
 {
@@ -54,8 +56,11 @@ namespace FootballEstimate.ViewModel
 
         public async void LoadTeamsAsync()
         {
-            var league = SelectedLeague; 
-            var teams = await TeamLoader.Instance.LoadTeamsAsync(league.LeagueKey, league.SeasonKey);
+            var league = SelectedLeague;
+
+            IEnumerable<Team> teams = league==null ? new Team[0] 
+                : await TeamLoader.Instance.LoadTeamsAsync(league.LeagueKey, league.SeasonKey);
+
             Teams.Clear();
             teams.ToList().ForEach(x => Teams.Add(x));
         }
@@ -125,7 +130,12 @@ namespace FootballEstimate.ViewModel
         }
 
 
-        
+        public override void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.RaisePropertyChanged(propertyName);
+            if (propertyName == nameof(SelectedLeague))
+                this.LoadTeamsAsync();
+        }
 
     }
 }
