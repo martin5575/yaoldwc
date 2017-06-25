@@ -8,8 +8,8 @@ namespace OpenLigaApi
 {
     public partial class Group
     {
-        public string GroupID {get; set;}
+        public int GroupID {get; set;}
         public string GroupName {get; set;}
-        public string GroupOrderID {get; set;}
+        public int GroupOrderID {get; set;}
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FootballEstimate.ViewModel.Messages
 {
-    public class DialogMessage
+    public class ModalDialogMessage
     {
         public ViewModelBase ViewModel { get; set; }
         public bool? DialogResult { get; set; }

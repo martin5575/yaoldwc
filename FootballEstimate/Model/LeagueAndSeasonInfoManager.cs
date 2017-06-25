@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,9 @@ namespace FootballEstimate.Model
 
         private LeagueAndSeasonInfoManager()
         {
-            var leagueInfoList = SettingsReader.ReadData<List<LeagueAndSeasonInfo>>(
-                Constants.DataFolder, Constants.LeaguesFile) ?? new List<LeagueAndSeasonInfo>(); 
+            var path = Path.Combine(Constants.DataFolder, Constants.LeaguesFile);
+            var leagueInfoList = SettingsReader.ReadData<List<LeagueAndSeasonInfo>>(path) 
+                ?? new List<LeagueAndSeasonInfo>(); 
             _Dictionary = leagueInfoList.ToDictionary(x => x.League.Key);
         }
 
@@ -28,7 +30,8 @@ namespace FootballEstimate.Model
         public void SaveFile()
         {
             var leagueInfoList = _Dictionary.Values.ToList();
-            SettingsReader.WriteData(Constants.DataFolder, Constants.LeaguesFile, leagueInfoList);
+            var path = Path.Combine(Constants.DataFolder, Constants.LeaguesFile);
+            SettingsReader.WriteData(path, leagueInfoList);
         }
 
 

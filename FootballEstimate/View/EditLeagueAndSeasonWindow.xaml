@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:FootballEstimate.View"
         mc:Ignorable="d"
         Title="Add League And Season" Height="165" Width="460"
-        WindowStyle="SingleBorderWindow" Background="White">
-    <Grid Name="Grid" DataContext="{Binding LeagueAndSeasonForDesign, Source={StaticResource Locator}}">
+        WindowStyle="SingleBorderWindow" Background="White"
+        DataContext="{Binding SeasonLeagueForDesign, Source={StaticResource Locator}}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60"/>
             <ColumnDefinition Width="50"/>

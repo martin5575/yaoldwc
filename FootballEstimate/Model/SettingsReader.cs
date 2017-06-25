@@ -10,9 +10,9 @@ namespace FootballEstimate.Model
 {
     class SettingsReader
     {
-        public static T ReadData<T>(string folder, string fileName)
+        public static T ReadData<T>(string fileName)
         {
-            string fileContent = ReadContent(folder, fileName);
+            string fileContent = ReadContent(fileName);
             if (fileContent == null)
                 return default(T);
             try {
@@ -24,26 +24,28 @@ namespace FootballEstimate.Model
             }
         }
 
-        private static string ReadContent(string folder, string fileName)
+        private static string ReadContent(string fileName)
         {
-            string path = Path.Combine(Environment.CurrentDirectory, folder, fileName);
+            string path = Path.Combine(Environment.CurrentDirectory, fileName);
             if (!File.Exists(path))
                 return null;
             return File.ReadAllText(path);
         }
 
-        public static void WriteData(string folder, string fileName, object o)
+        public static void WriteData(string fileName, object o)
         {
             string content = JsonConvert.SerializeObject(o);
-            WriteContent(folder, fileName, content);
+            WriteContent(fileName, content);
         }
 
-        private static void WriteContent(string folder, string fileName, string content)
+        private static void WriteContent(string fileName, string content)
         {
-            string path = Path.Combine(Environment.CurrentDirectory, folder);
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-            string fullPath = Path.Combine(Environment.CurrentDirectory, folder, fileName);
+            string fullPath = Path.Combine(Environment.CurrentDirectory, fileName);
+            if (!File.Exists(fullPath))
+            {
+                var dir = Path.GetDirectoryName(fullPath);
+                Directory.CreateDirectory(dir);
+            }
             File.WriteAllText(fullPath, content);
         }
     }

@@ -9,14 +9,14 @@ namespace OpenLigaApi
     public class Goal
     {
         public string Comment {get; set;}
-        public string GoalGetterID {get; set;}
+        public int GoalGetterID {get; set;}
         public string GoalGetterName {get; set;}
-        public string GoalID {get; set;}
-        public string IsOvertime {get; set;}
-        public string IsOwnGoal {get; set;}
-        public string IsPenalty {get; set;}
-        public string MatchMinute {get; set;}
-        public string ScoreTeam1 {get; set;}
-        public string ScoreTeam2 {get; set;}
+        public int GoalID {get; set;}
+        public bool IsOvertime {get; set;}
+        public bool IsOwnGoal {get; set;}
+        public bool IsPenalty {get; set;}
+        public int? MatchMinute {get; set;}
+        public int ScoreTeam1 {get; set;}
+        public int ScoreTeam2 {get; set;}
     }
 }

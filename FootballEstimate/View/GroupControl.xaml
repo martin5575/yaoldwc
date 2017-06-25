@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="FootballEstimate.View.GroupControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FootballEstimate.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="200"
+             Height="25">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="160*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="0" Command="{Binding Previous}">&lt;</Button>
+        <ComboBox Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                  ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" 
+                  DisplayMemberPath="GroupName"/>
+        <Button Grid.Column="2" Command="{Binding Next}">&gt;</Button>
+    </Grid>
+</UserControl>

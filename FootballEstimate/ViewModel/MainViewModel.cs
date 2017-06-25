@@ -9,6 +9,10 @@ using System;
 using FootballEstimate.View;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
+using FootballEstimate.Model.Loader;
+using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
+using FootballEstimate.View.Service;
 
 namespace FootballEstimate.ViewModel
 {
@@ -37,7 +41,8 @@ namespace FootballEstimate.ViewModel
             }
             else
             {
-                this.MessengerInstance.Register<DialogMessage>(this, ShowDialog);
+                this.MessengerInstance.Register<ModalDialogMessage>(this, ShowDialog);
+                this.MessengerInstance.Register<TabMessage>(this, AddTab);
                 // Code runs "for real"
                 foreach(var league in LeagueAndSeasonInfoManager.Instance.GetAllLeagueInfo())
                     foreach(var season in league.Seasons)
@@ -45,11 +50,17 @@ namespace FootballEstimate.ViewModel
             }
         }
 
-        private void ShowDialog(DialogMessage obj)
+        private void AddTab(TabMessage tabMessage)
         {
-            var view = new EditLeagueAndSeasonWindow();
-            view.Grid.DataContext = obj.ViewModel;
-            obj.DialogResult = view.ShowDialog();
+            var navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            navigationService.NavigateTo("Tab", tabMessage.ViewModel);
+        }
+
+        private void ShowDialog(ModalDialogMessage modalDialogMessage)
+        {
+            var modalDialogService = SimpleIoc.Default.GetInstance<IModalDialogService>();
+            var dailogResult = modalDialogService.ShowDialog(modalDialogMessage.ViewModel);
+            modalDialogMessage.DialogResult = dailogResult;
         }
 
         public RelayCommand LoadTeams => new RelayCommand(LoadTeamsAsync);
@@ -71,7 +82,7 @@ namespace FootballEstimate.ViewModel
         public void AddSeasonAction()
         {
             var vm = new SeasonLeagueViewModel();
-            var message = new DialogMessage { ViewModel = vm };
+            var message = new ModalDialogMessage { ViewModel = vm };
             this.MessengerInstance.Send(message);
             if (message.DialogResult == true)
                 Leagues.Add(vm);
@@ -87,7 +98,7 @@ namespace FootballEstimate.ViewModel
         public void EditSeasonAction()
         {
             var old = (SeasonLeagueViewModel)SelectedLeague.Clone();
-            var message = new DialogMessage { ViewModel = SelectedLeague };
+            var message = new ModalDialogMessage { ViewModel = SelectedLeague };
             this.MessengerInstance.Send(message);
             if (message.DialogResult != true)
             {
@@ -96,6 +107,27 @@ namespace FootballEstimate.ViewModel
                 SelectedLeague = old;
             }
         }
+
+        public RelayCommand OpenSeason => new RelayCommand(OpenSeasonActionAsync, CanOpenSeason);
+
+        private bool CanOpenSeason()
+        {
+            return SelectedLeague != null;
+        }
+
+        public async void OpenSeasonActionAsync()
+        {
+            var league = SelectedLeague;
+            var matchs = await SeasonLoader.Instance.LoadMatchsAsync(league.LeagueKey, league.SeasonKey);
+            var matchViewModels = MatchViewModel.FromMatchs(matchs);
+            var seasonViewModel = SeasonViewModel.From(matchViewModels);
+
+            // work with Observable Collection instead. Bind like in https://csharp.christiannagel.com/2016/12/19/tabcontrolwpf/
+            var message = new TabMessage { ViewModel = seasonViewModel };
+            this.MessengerInstance.Send(message);
+        }
+
+
 
         private ObservableCollection<SeasonLeagueViewModel> _Leagues = new ObservableCollection<SeasonLeagueViewModel>();
         public ObservableCollection<SeasonLeagueViewModel> Leagues

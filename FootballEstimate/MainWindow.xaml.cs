@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Ioc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,22 @@ namespace FootballEstimate
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Instance { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            Instance = this;
+        }
+
+        internal void CreateTab(object viewModel)
+        {
+            var tabItem = new TabItem();
+            tabItem.Content = new View.SeasonControl();
+            tabItem.DataContext = viewModel;
+            int index = this.tabControl.Items.Add(tabItem);
+            this.tabControl.SelectedIndex = index;
+            
         }
     }
 }

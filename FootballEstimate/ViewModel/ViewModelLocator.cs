@@ -44,6 +44,10 @@ namespace FootballEstimate.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SeasonLeagueViewModel>();
+            SimpleIoc.Default.Register<GoalViewModel>();
+            SimpleIoc.Default.Register<GroupViewModel>();
+            SimpleIoc.Default.Register<MatchResultViewModel>();
+            SimpleIoc.Default.Register<MatchViewModel>();
         }
 
         public MainViewModel Main
@@ -54,11 +58,43 @@ namespace FootballEstimate.ViewModel
             }
         }
         
-        public SeasonLeagueViewModel LeagueAndSeasonForDesign
+        public SeasonLeagueViewModel SeasonLeagueForDesign
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<SeasonLeagueViewModel>();
+            }
+        }
+
+        public GoalViewModel GoalForDesign
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GoalViewModel>();
+            }
+        }
+
+        public GroupViewModel GroupForDesign
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GroupViewModel>();
+            }
+        }
+
+        public MatchViewModel MatchForDesign
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MatchViewModel>();
+            }
+        }
+
+        public MatchResultViewModel MatchResultForDesign
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MatchResultViewModel>();
             }
         }
 

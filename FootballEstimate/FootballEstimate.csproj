@@ -80,20 +80,51 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Constants.cs" />
-    <Compile Include="Model\IconLoader.cs" />
+    <Compile Include="Model\Loader\IconLoader.cs" />
     <Compile Include="Model\Data\LeagueAndSeasonInfo.cs" />
     <Compile Include="Model\Data\LeagueInfo.cs" />
     <Compile Include="Model\LeagueAndSeasonInfoManager.cs" />
     <Compile Include="Model\Data\SeasonInfo.cs" />
+    <Compile Include="Model\Loader\DoubleCachedLoader.cs" />
+    <Compile Include="Model\Loader\LeagueSeasonKey.cs" />
+    <Compile Include="Model\Loader\SeasonLoader.cs" />
     <Compile Include="Model\SettingsReader.cs" />
-    <Compile Include="Model\TeamLoader.cs" />
+    <Compile Include="Model\Loader\TeamLoader.cs" />
     <Compile Include="ValueConverter\TeamImageConverter.cs" />
-    <Compile Include="ViewModel\Messages\DialogMessage.cs" />
+    <Compile Include="ViewModel\MatchResultViewModel.cs" />
+    <Compile Include="ViewModel\GoalViewModel.cs" />
+    <Compile Include="ViewModel\GroupViewModel.cs" />
+    <Compile Include="ViewModel\MatchViewModel.cs" />
+    <Compile Include="ViewModel\Messages\ModalDialogMessage.cs" />
+    <Compile Include="ViewModel\Messages\TabMessage.cs" />
     <Compile Include="ViewModel\SeasonLeagueViewModel.cs" />
+    <Compile Include="ViewModel\SeasonViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EditLeagueAndSeasonWindow.xaml.cs">
       <DependentUpon>EditLeagueAndSeasonWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GoalControl.xaml.cs">
+      <DependentUpon>GoalControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MatchsControl.xaml.cs">
+      <DependentUpon>MatchsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GoalsControl.xaml.cs">
+      <DependentUpon>GoalsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GroupControl.xaml.cs">
+      <DependentUpon>GroupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MatchControl.xaml.cs">
+      <DependentUpon>MatchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SeasonControl.xaml.cs">
+      <DependentUpon>SeasonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Service\Implementation\DialogService.cs" />
+    <Compile Include="View\Service\Interface\IModalDialogService.cs" />
+    <Compile Include="View\Service\Implementation\NavigationService.cs" />
+    <Compile Include="View\Service\Implementation\ModalDialogService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -108,6 +139,30 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\EditLeagueAndSeasonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GoalControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MatchsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\GoalsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GroupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MatchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SeasonControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,11 +196,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{7af3f3ed-8794-46b9-aa0a-b9234bfa9351}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenLigaApi\OpenLigaApi.csproj">
       <Project>{e8d9ba75-43df-442d-a9f6-8298a3744943}</Project>
       <Name>OpenLigaApi</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -86,7 +87,11 @@ namespace OpenLigaApi
                 HttpResponseMessage response = await client.GetAsync(request);
                 if (!response.IsSuccessStatusCode)
                     throw new Exception($"Request was not successfull: {response.ReasonPhrase}");
-                return await response.Content.ReadAsAsync<T>();
+
+                var data = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(data);
+
+                //return await response.Content.ReadAsAsync<T>();
             }
             catch (Exception ex)
             {

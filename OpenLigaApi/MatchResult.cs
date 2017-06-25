@@ -8,12 +8,12 @@ namespace OpenLigaApi
 {
     public class MatchResult
     {
-        public string PointsTeam1 { get; set; }
-        public string PointsTeam2 { get; set; }
+        public int PointsTeam1 { get; set; }
+        public int PointsTeam2 { get; set; }
         public string ResultDescription { get; set; }
-        public string ResultID { get; set; }
+        public int ResultID { get; set; }
         public string ResultName { get; set; }
-        public string ResultOrderID { get; set; }
-        public string ResultTypeID { get; set; }
+        public int ResultOrderID { get; set; }
+        public int ResultTypeID { get; set; }
     }
 }
