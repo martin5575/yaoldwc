@@ -29,20 +29,8 @@ namespace FootballEstimate.View.Service
 
         public void NavigateTo(string pageKey, object parameter)
         {
-            switch(pageKey)
-            {
-                case "Tab":
-                    OpenOrCreateTab(parameter);
-                    break;
-                default:
-                    throw new NotSupportedException($"pageKey is not supported '{pageKey}'.");
-            }
+            throw new NotImplementedException();
         }
 
-        private void OpenOrCreateTab(object viewModel)
-        {
-            // need to check if there is a view for the view Model already!
-            MainWindow.Instance.CreateTab(viewModel);
-        }
     }
 }

@@ -33,9 +33,9 @@ namespace FootballEstimate.ViewModel
         public int? ScoreTeam1 => _goal?.ScoreTeam1;
         public int? ScoreTeam2 => _goal?.ScoreTeam2;
 
-        public string GoalPropeties => string.Join(", ",
-            IsOvertime ? "OT" : string.Empty,
-            IsOwnGoal ? "OG" : string.Empty,
-            IsPenalty ? "P" : string.Empty);
+        public string GoalProperties => string.Join(", ",
+            new []{ IsOvertime ? "OT" : string.Empty,
+                IsOwnGoal ? "OG" : string.Empty,
+                IsPenalty ? "P" : string.Empty }.Where(x=>!string.IsNullOrEmpty(x)) );
     }
 }

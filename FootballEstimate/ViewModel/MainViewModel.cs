@@ -13,6 +13,9 @@ using FootballEstimate.Model.Loader;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using FootballEstimate.View.Service;
+using FootballEstimate.Model.OpenLiga;
+using FootballEstimate.DesignModel;
+using Infrastructure.Collections;
 
 namespace FootballEstimate.ViewModel
 {
@@ -30,11 +33,17 @@ namespace FootballEstimate.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private IOpenLigaService _openLigaService;
+        private ILeagueAndSeasonInfoService _leagueAndSeasonInfoService;
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel()
+        public MainViewModel(IOpenLigaService openLigaService, ILeagueAndSeasonInfoService leageAndSeasonInfoService)
         {
+            _openLigaService = openLigaService;
+            _leagueAndSeasonInfoService = leageAndSeasonInfoService;
+
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
@@ -42,18 +51,41 @@ namespace FootballEstimate.ViewModel
             else
             {
                 this.MessengerInstance.Register<ModalDialogMessage>(this, ShowDialog);
-                this.MessengerInstance.Register<TabMessage>(this, AddTab);
+                this.MessengerInstance.Register<TabMessage>(this, HandleTab);
                 // Code runs "for real"
-                foreach(var league in LeagueAndSeasonInfoManager.Instance.GetAllLeagueInfo())
-                    foreach(var season in league.Seasons)
-                        Leagues.Add(SeasonLeagueViewModel.Create(league.League, season));
             }
+
+            Tabs.Add(CreateLeaguesTab());
         }
 
-        private void AddTab(TabMessage tabMessage)
+        private TabItemViewModel CreateLeaguesTab()
         {
-            var navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-            navigationService.NavigateTo("Tab", tabMessage.ViewModel);
+            var leaguesViewModel = new LeaguesViewModel(_leagueAndSeasonInfoService);
+            return new TabItemViewModel("main", "Leagues", "Main Tab containing all Leagues", leaguesViewModel, false);
+        }
+
+
+        private void HandleTab(TabMessage tabMessage)
+        {
+            string id = tabMessage.Id ?? tabMessage.ViewModel?.Id;
+            var item = Tabs.FirstOrDefault(x => x.Id == id);
+            switch(tabMessage.Action)
+            {
+                case TabMessageAction.BringToFront:
+                    SelectedTab = item;
+                    break;
+                case TabMessageAction.Close:
+                    Tabs.Remove(item);
+                    break;
+                case TabMessageAction.Create:
+                    if (item == null)
+                    {
+                        item = tabMessage.ViewModel;
+                        Tabs.Add(tabMessage.ViewModel);
+                    }
+                    SelectedTab = item;
+                    break;
+            }
         }
 
         private void ShowDialog(ModalDialogMessage modalDialogMessage)
@@ -63,111 +95,27 @@ namespace FootballEstimate.ViewModel
             modalDialogMessage.DialogResult = dailogResult;
         }
 
-        public RelayCommand LoadTeams => new RelayCommand(LoadTeamsAsync);
 
-        public async void LoadTeamsAsync()
+        private ObservableCollection<TabItemViewModel> _Tabs = new ObservableCollection<TabItemViewModel>();
+        public ObservableCollection<TabItemViewModel> Tabs
         {
-            var league = SelectedLeague;
-
-            IEnumerable<Team> teams = league==null ? new Team[0] 
-                : await TeamLoader.Instance.LoadTeamsAsync(league.LeagueKey, league.SeasonKey);
-
-            Teams.Clear();
-            teams.ToList().ForEach(x => Teams.Add(x));
-        }
-
-
-        public RelayCommand AddSeason => new RelayCommand(AddSeasonAction);
-
-        public void AddSeasonAction()
-        {
-            var vm = new SeasonLeagueViewModel();
-            var message = new ModalDialogMessage { ViewModel = vm };
-            this.MessengerInstance.Send(message);
-            if (message.DialogResult == true)
-                Leagues.Add(vm);
-        }
-
-        public RelayCommand EditSeason => new RelayCommand(EditSeasonAction,CanEditSeason);
-
-        private bool CanEditSeason()
-        {
-            return SelectedLeague!=null;
-        }
-
-        public void EditSeasonAction()
-        {
-            var old = (SeasonLeagueViewModel)SelectedLeague.Clone();
-            var message = new ModalDialogMessage { ViewModel = SelectedLeague };
-            this.MessengerInstance.Send(message);
-            if (message.DialogResult != true)
-            {
-                int index = Leagues.IndexOf(SelectedLeague);
-                Leagues[index] = old;
-                SelectedLeague = old;
-            }
-        }
-
-        public RelayCommand OpenSeason => new RelayCommand(OpenSeasonActionAsync, CanOpenSeason);
-
-        private bool CanOpenSeason()
-        {
-            return SelectedLeague != null;
-        }
-
-        public async void OpenSeasonActionAsync()
-        {
-            var league = SelectedLeague;
-            var matchs = await SeasonLoader.Instance.LoadMatchsAsync(league.LeagueKey, league.SeasonKey);
-            var matchViewModels = MatchViewModel.FromMatchs(matchs);
-            var seasonViewModel = SeasonViewModel.From(matchViewModels);
-
-            // work with Observable Collection instead. Bind like in https://csharp.christiannagel.com/2016/12/19/tabcontrolwpf/
-            var message = new TabMessage { ViewModel = seasonViewModel };
-            this.MessengerInstance.Send(message);
-        }
-
-
-
-        private ObservableCollection<SeasonLeagueViewModel> _Leagues = new ObservableCollection<SeasonLeagueViewModel>();
-        public ObservableCollection<SeasonLeagueViewModel> Leagues
-        {
-            get { return _Leagues; }
-            set {
-                _Leagues = value;
-                this.RaisePropertyChanged(nameof(Leagues));
-            }
-        }
-
-        private SeasonLeagueViewModel _SelectedLeague;
-        public SeasonLeagueViewModel SelectedLeague
-        {
-            get { return _SelectedLeague; }
+            get { return _Tabs; }
             set
             {
-                _SelectedLeague = value;
-                this.RaisePropertyChanged(nameof(SelectedLeague));
+                _Tabs = value;
+                this.RaisePropertyChanged(nameof(Tabs));
             }
         }
 
-        private ObservableCollection<Team> _Teams = new ObservableCollection<Team>();
-        public ObservableCollection<Team> Teams
+        private TabItemViewModel _SelectedTab;
+        public TabItemViewModel SelectedTab
         {
-            get { return _Teams; }
+            get { return _SelectedTab; }
             set
             {
-                _Teams = value;
-                this.RaisePropertyChanged(nameof(Teams));
+                _SelectedTab = value;
+                this.RaisePropertyChanged(nameof(SelectedTab));
             }
         }
-
-
-        public override void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            base.RaisePropertyChanged(propertyName);
-            if (propertyName == nameof(SelectedLeague))
-                this.LoadTeamsAsync();
-        }
-
     }
 }

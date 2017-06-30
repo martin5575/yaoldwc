@@ -6,10 +6,12 @@
              xmlns:local="clr-namespace:FootballEstimate.View"
              mc:Ignorable="d" 
              xmlns:converter="clr-namespace:FootballEstimate.ValueConverter"
-             d:DesignHeight="20" d:DesignWidth="300"
-             DataContext="{Binding MatchForDesign, Source={StaticResource Locator}}">
+             d:DesignHeight="30" d:DesignWidth="360"
+             Height="30" Width="360"
+             d:DataContext="{Binding MatchForDesign, Source={StaticResource Locator}}">
     <UserControl.Resources>
         <converter:TeamImageConverter x:Key="teamImageConverter"/>
+        <converter:DateTimeConverter x:Key="dateTimeConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,15 +19,19 @@
         <ColumnDefinition Width="20" />
         <ColumnDefinition Width="40" />
         <ColumnDefinition Width="20" />
-        <ColumnDefinition Width="40" />
+        <ColumnDefinition Width="80" />
+        <ColumnDefinition Width="80" />
+        <ColumnDefinition Width="80" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
-        <Image Grid.Column="0" Grid.Row="0" Source="{Binding Team1,Converter={StaticResource teamImageConverter}}" Margin="2,2,2,2" Width="20" Height="20"/>
+        <Image Grid.Column="0" Grid.Row="0" Source="{Binding Path=Team1, Converter={StaticResource teamImageConverter}}" Margin="2,2,2,2" Width="20" Height="20"/>
         <Label Content="-" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <Image Grid.Column="2" Grid.Row="0" Source="{Binding Team2,Converter={StaticResource teamImageConverter}}" Margin="2,2,2,2" Width="20" Height="20"/>
-        <Label Content="{Binding Result, Mode=OneWay}" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Image Grid.Column="2" Grid.Row="0" Source="{Binding Path=Team2, Converter={StaticResource teamImageConverter}}" Margin="2,2,2,2" Width="20" Height="20"/>
+        <Label Content="{Binding Path=Result, Mode=OneWay}" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Label Content="{Binding Path=MatchDateTime, Mode=OneWay, Converter={StaticResource dateTimeConverter}}" Grid.Row="0" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Label Content="{Binding Path=LocationName, Mode=OneWay}" Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
     </Grid>
 </UserControl>

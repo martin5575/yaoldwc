@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace FootballEstimate.Model
 {
-    public class LeagueAndSeasonInfoManager
+    public class LeagueAndSeasonInfoService : ILeagueAndSeasonInfoService
     {
         private readonly Dictionary<string, LeagueAndSeasonInfo> _Dictionary;
 
-        public static readonly LeagueAndSeasonInfoManager Instance;
+        public static readonly LeagueAndSeasonInfoService Instance;
         
-        static LeagueAndSeasonInfoManager()
+        static LeagueAndSeasonInfoService()
         {
-            Instance = new LeagueAndSeasonInfoManager();
+            Instance = new LeagueAndSeasonInfoService();
         }
 
-        private LeagueAndSeasonInfoManager()
+        private LeagueAndSeasonInfoService()
         {
             var path = Path.Combine(Constants.DataFolder, Constants.LeaguesFile);
             var leagueInfoList = SettingsReader.ReadData<List<LeagueAndSeasonInfo>>(path) 

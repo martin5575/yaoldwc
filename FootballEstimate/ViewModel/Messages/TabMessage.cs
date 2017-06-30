@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace FootballEstimate.ViewModel.Messages
 {
+    public enum TabMessageAction { BringToFront, Close,
+        Create
+    }
+
     public class TabMessage
     {
-        public ViewModelBase ViewModel { get; set; }
-
+        public string Id { get; set; }
+        public TabMessageAction Action { get; set; }
+        public TabItemViewModel ViewModel { get; internal set; }
     }
 }

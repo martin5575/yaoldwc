@@ -44,7 +44,7 @@ namespace FootballEstimate.ViewModel
         public Team Team2 => _match?.Team2;
         public DateTime? LastUpdateDateTime => _match?.LastUpdateDateTime;
         public int? LeagueId => _match?.LeagueId;
-        public string LocationName => _match?.Location.LocationCity;
+        public string LocationName => _match?.Location?.LocationCity;
         public string MatchDateTimeUTC => _match?.MatchDateTimeUTC;
         public bool MatchIsFinished => _match?.MatchIsFinished ?? false;
         public string NumberOfViewers => _match?.NumberOfViewers;

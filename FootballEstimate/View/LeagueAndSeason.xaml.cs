@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FootballEstimate
+namespace FootballEstimate.View
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// Interaktionslogik für LeagueAndSeason.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LeagueAndSeason : UserControl
     {
-        public MainWindow()
+        public LeagueAndSeason()
         {
             InitializeComponent();
         }
-
-
     }
 }

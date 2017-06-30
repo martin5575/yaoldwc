@@ -30,6 +30,6 @@ namespace FootballEstimate.ViewModel
         public int? ResultOrderID => _matchResult?.ResultOrderID;
         public int? ResultTypeID => _matchResult?.ResultTypeID;
 
-        public string DisplayString => $"{PointsTeam1.GetValueOrDefault(0)}:{PointsTeam1.GetValueOrDefault(1)}";
+        public string DisplayString => $"{PointsTeam1.GetValueOrDefault(0)}:{PointsTeam2.GetValueOrDefault(0)}";
     }
 }

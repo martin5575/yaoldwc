@@ -14,6 +14,7 @@ namespace FootballEstimate.Model
         public static string SeasonsFile = "Seasons.json";
         public static string TeamsFile = "Teams.json";
         public static string MatchsFile = "Matchs.json";
+        public static string ThreeLetterCodeFile = "3LetterCode.json";
 
     }
 }

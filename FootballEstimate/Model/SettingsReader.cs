@@ -24,6 +24,11 @@ namespace FootballEstimate.Model
             }
         }
 
+        internal static void ReadData<T>()
+        {
+            throw new NotImplementedException();
+        }
+
         private static string ReadContent(string fileName)
         {
             string path = Path.Combine(Environment.CurrentDirectory, fileName);

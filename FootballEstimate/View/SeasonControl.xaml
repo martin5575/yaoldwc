@@ -6,30 +6,36 @@
              xmlns:local="clr-namespace:FootballEstimate.View"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="500">
-    <Grid>
+    <Grid Margin="5,5,5,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
-            <RowDefinition Height="200" />
-            <RowDefinition Height="150" />
+            <RowDefinition Height="270*" />
+            <RowDefinition Height="150*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40" />
                 <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="20*" />
                 <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="20*" />
                 <ColumnDefinition Width="40" />
-                <ColumnDefinition Width="100*" />
-                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="20*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">live</Button>
+            <Button Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,0,5,0">live</Button>
             <local:GroupControl Grid.Column="1"></local:GroupControl>
             <Button Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">Stats</Button>
-            <ComboBox Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <ComboBoxItem>Model</ComboBoxItem>
+            <ComboBox Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                      Margin="5,0,5,0" ItemsSource="{Binding GoalModels}" SelectedItem="{Binding SelectedGoalModel}">
             </ComboBox>
-            <ToggleButton Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">Probs</ToggleButton>
+            <ToggleButton Grid.Column="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">Probs</ToggleButton>
         </Grid>
-        <local:MatchsControl Grid.Row="1"></local:MatchsControl>
-        <local:GoalsControl Grid.Row="2"></local:GoalsControl>
+        <Grid Grid.Row="1" Margin="5,5,5,0">
+            <local:MatchsControl></local:MatchsControl>
+        </Grid>
+        <Grid Grid.Row="2" Margin="5,0,5,5">
+            <local:GoalsControl></local:GoalsControl>
+        </Grid>
     </Grid>
 </UserControl>

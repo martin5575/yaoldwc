@@ -12,9 +12,15 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using FootballEstimate.DesignModel;
+using FootballEstimate.Model;
+using FootballEstimate.Model.OpenLiga;
+using FootballEstimate.View.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using System.Collections.Generic;
 
 namespace FootballEstimate.ViewModel
 {
@@ -31,23 +37,32 @@ namespace FootballEstimate.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                // Create design time view services and models
+                SimpleIoc.Default.Register<IOpenLigaService, OpenLigaServiceDesign>();
+                SimpleIoc.Default.Register<ILeagueAndSeasonInfoService, LeagueAndSeasonInfoServiceDesign>();
+            }
+            else
+            {
+                // Create run time view services and models
+                SimpleIoc.Default.Register<IOpenLigaService, OpenLigaService>();
+                SimpleIoc.Default.Register<ILeagueAndSeasonInfoService>(()=> LeagueAndSeasonInfoService.Instance);
+            }
+
+            SimpleIoc.Default.Register<IModalDialogService, ModalDialogService>();
+            SimpleIoc.Default.Register<IDialogService, DialogService>();
+            SimpleIoc.Default.Register<INavigationService, View.Service.NavigationService>();
 
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<SeasonLeagueViewModel>();
+            SimpleIoc.Default.Register<LeagueViewModel>();
             SimpleIoc.Default.Register<GoalViewModel>();
             SimpleIoc.Default.Register<GroupViewModel>();
             SimpleIoc.Default.Register<MatchResultViewModel>();
             SimpleIoc.Default.Register<MatchViewModel>();
+            SimpleIoc.Default.Register<SeasonViewModel>();
+            SimpleIoc.Default.Register<TeamViewModel>();
+            SimpleIoc.Default.Register<TeamsOfLeagueViewModel>();
         }
 
         public MainViewModel Main
@@ -57,12 +72,19 @@ namespace FootballEstimate.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
-        public SeasonLeagueViewModel SeasonLeagueForDesign
+        public LeagueViewModel SeasonLeagueForDesign
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SeasonLeagueViewModel>();
+                return ServiceLocator.Current.GetInstance<LeagueViewModel>();
+            }
+        }
+
+        public SeasonViewModel SeasonViewModelForDesign
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SeasonViewModel>();
             }
         }
 
@@ -95,6 +117,31 @@ namespace FootballEstimate.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MatchResultViewModel>();
+            }
+        }
+
+        public TeamViewModel TeamForDesign
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<TeamViewModel>();
+            }
+        }
+
+        public IEnumerable<TeamViewModel> TeamsForDesign
+        {
+            get
+            {
+                var service = ServiceLocator.Current.GetInstance<IOpenLigaService>();
+                return TeamViewModel.FromTeams(service.LoadTeamsAsync(null, null).Result);
+            }
+        }
+
+        public TabItemViewModel TabItemForDesign
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<TabItemViewModel>();
             }
         }
 

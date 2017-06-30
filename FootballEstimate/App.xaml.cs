@@ -19,9 +19,7 @@ namespace FootballEstimate
     {
         public App()
         {
-            SimpleIoc.Default.Register<IModalDialogService, ModalDialogService>();
-            SimpleIoc.Default.Register<IDialogService, DialogService>();
-            SimpleIoc.Default.Register<INavigationService, View.Service.NavigationService>();
+
         }
     }
 }

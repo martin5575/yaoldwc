@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FootballEstimate
+namespace FootballEstimate.View
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// Interaktionslogik für TeamControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TabItemControl : UserControl
     {
-        public MainWindow()
+        public TabItemControl()
         {
             InitializeComponent();
         }
 
+        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
 
+        }
+
+        private void ContentControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
     }
 }

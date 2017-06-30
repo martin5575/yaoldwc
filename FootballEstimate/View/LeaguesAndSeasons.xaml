@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="FootballEstimate.View.LeaguesAndSeasons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FootballEstimate.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="300"
+             >
+    <Grid Background="#FFE5E5E5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="60*"></RowDefinition> 
+        </Grid.RowDefinitions>
+        <Button x:Name="buttonAdd" Content="+" Command="{Binding AddSeason}"
+        	                HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="20"/>
+     
+        <ListBox Grid.Row="1" ItemsSource="{Binding Leagues}" SelectedItem="{Binding SelectedLeague}" 
+                        Margin="2,2,2,2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                 AlternationCount="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:LeagueAndSeason HorizontalAlignment="Stretch"></local:LeagueAndSeason>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</UserControl>

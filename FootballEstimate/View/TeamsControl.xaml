@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="FootballEstimate.View.MatchsControl"
+﻿<UserControl x:Class="FootballEstimate.View.TeamsControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FootballEstimate.View"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="500"
-             d:DataContext="{Binding Path=SeasonViewModelForDesign, Source={StaticResource Locator}}">
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{Binding Main, Source={StaticResource Locator}}">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,12 +15,14 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <ListBox ItemsSource="{Binding Path=MatchsOfGroup}" SelectedItem="{Binding Path=SelectedMatch}" 
-                 AlternationCount="2">
+        <ListBox x:Name="listBoxTeams"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                         ItemsSource="{Binding Teams}"
+                              AlternationCount="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <local:MatchControl VerticalAlignment="Stretch" Margin="2,2,2,2"></local:MatchControl>
-                </DataTemplate> 
+                    <local:TeamControl VerticalAlignment="Stretch" Margin="2,2,2,2"></local:TeamControl>
+                </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
     </Grid>

@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="FootballEstimate.View.TeamControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FootballEstimate.View"
+             xmlns:converter="clr-namespace:FootballEstimate.ValueConverter"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="300"
+             d:DataContext="{Binding TeamForDesign, Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <converter:TeamImageConverter x:Key="teamImageConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Canvas Height="24" HorizontalAlignment="Stretch">
+            <Image Source="{Binding Path=LocalIconSource}" Margin="2,2,2,2" Width="20" Height="20"/>
+            <!--<TextBlock Text="{Binding ShortName}" Margin="22,0,0,0"/>-->
+            <TextBlock Text="{Binding Path=TeamName}" Margin="28,0,0,0" />
+        </Canvas>
+    </Grid>
+</UserControl>

@@ -4,68 +4,56 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootballEstimate"
+        xmlns:userView="clr-namespace:FootballEstimate.View"
+        xmlns:viewModel="clr-namespace:FootballEstimate.ViewModel"
         xmlns:converter="clr-namespace:FootballEstimate.ValueConverter"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
-        WindowStyle="ToolWindow" Background="White">
+        WindowStyle="ToolWindow">
     
     <Window.Resources>
-        <Style  TargetType="{x:Type ListBoxItem}">
-            <Style.Triggers>
-                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                    <Setter Property="Background" Value="#19f39611"></Setter>
-                </Trigger>
-                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                    <Setter Property="Background" Value="#19000000"></Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <converter:TeamImageConverter x:Key="teamImageConverter"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Styles.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:TeamImageConverter x:Key="teamImageConverter"/>
+        </ResourceDictionary>
     </Window.Resources>
 
-
-
     <Grid>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" 
+                    ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" ToolTip="{Binding Path=ToolTip, Mode=OneTime}">
+                        <TextBlock Text="{Binding Path=Caption, Mode=OneWay}"/>
+                        <Button Content="X" Command="{Binding CloseCommand, Mode=OneTime}" IsEnabled="{Binding CanClose}" Width="15" Height="15" Margin="2,2,2,2" />
+                    </StackPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <!--<userView:TabItemControl DataContext="{Binding ContentViewModel}"></userView:TabItemControl>-->
 
-        <TabControl x:Name="tabControl" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" >
-            <TabItem Header="Main">
-                <Grid Background="#FFE5E5E5">
-                    <ComboBox ItemsSource="{Binding Leagues}" SelectedItem="{Binding SelectedLeague}" 
-                              DisplayMemberPath="LongDisplayName"
-                  Height="22" Margin="5,5,140,0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                    </ComboBox>
-                    <Button x:Name="buttonAdd" Content="+" Command="{Binding AddSeason}"
-        	            HorizontalAlignment="Right" Margin="0,5,120,0" VerticalAlignment="Top" Width="20"/>
-                    <Button x:Name="buttonRemove" Content="-" Command="{Binding RemoveSeason}"
-        	            HorizontalAlignment="Right" Margin="0,5,100,0" VerticalAlignment="Top" Width="20"/>
-                    <Button x:Name="buttonEdit" Content="..." Command="{Binding EditSeason}"
-        	            HorizontalAlignment="Right" Margin="0,5,80,0" VerticalAlignment="Top" Width="20"/>
-                    <Button x:Name="buttonOpen" Content="Open" Command="{Binding OpenSeason}"
-        	            HorizontalAlignment="Right" Margin="0,5,40,0" VerticalAlignment="Top" Width="40"/>
-                    <Button x:Name="buttonTeams" Content="Refresh" Command="{Binding LoadTeams}"
-                        HorizontalAlignment="Right" Margin="0,5,0,0" VerticalAlignment="Top" Width="40"/>
-
-                    <ListBox x:Name="listBoxTeams"
-                         HorizontalAlignment="Stretch" Margin="5,40,0,0" 
-                         VerticalAlignment="Stretch" 
-                         ItemsSource="{Binding Teams}"
-                              AlternationCount="2">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Canvas Height="24" HorizontalAlignment="Stretch">
-                                    <Image Source="{Binding Converter={StaticResource teamImageConverter}}" Margin="2,2,2,2" Width="20" Height="20"/>
-                                    <!--<TextBlock Text="{Binding ShortName}" Margin="22,0,0,0"/>-->
-                                    <TextBlock Text="{Binding TeamName}" Margin="28,0,0,0" />
-                                </Canvas>
+                    <ContentControl Content="{Binding Path=ContentViewModel}">
+                        <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type viewModel:LeaguesViewModel}" >
+                                <userView:LeaguesAndSeasons></userView:LeaguesAndSeasons>
                             </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-
-
-                </Grid>
-            </TabItem>
+                            <DataTemplate DataType="{x:Type viewModel:SeasonViewModel}">
+                                <userView:SeasonControl></userView:SeasonControl>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type viewModel:TeamsOfLeagueViewModel}">
+                                <userView:TeamsControl></userView:TeamsControl>
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
+
+ 
     </Grid>
     
 </Window>

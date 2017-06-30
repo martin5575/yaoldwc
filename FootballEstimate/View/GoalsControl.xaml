@@ -5,12 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FootballEstimate.View"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="500">
+             d:DesignHeight="150" d:DesignWidth="500"
+             d:DataContext="{Binding Path=SeasonViewModelForDesign, Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <ListBox ItemsSource="{Binding SelectedMatch.Goals}">
+        <ListBox ItemsSource="{Binding SelectedMatch.Goals}" AlternationCount="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <local:GoalControl></local:GoalControl>
+                    <local:GoalControl VerticalAlignment="Stretch" Margin="2,2,2,2"></local:GoalControl>
                 </DataTemplate> 
             </ListBox.ItemTemplate>
         </ListBox>

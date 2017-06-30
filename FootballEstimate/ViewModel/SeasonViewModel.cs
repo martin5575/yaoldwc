@@ -9,6 +9,8 @@ using System.Runtime.CompilerServices;
 using Infrastructure.Collections;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 
 namespace FootballEstimate.ViewModel
 {
@@ -35,21 +37,31 @@ namespace FootballEstimate.ViewModel
             return season;
         }
 
-        public ICommand Previous => new RelayCommand(GotoPrevious, CanGotPrevious);
-
-        private bool CanGotPrevious()
-        {
-            return Groups.IndexOf(SelectedGroup) > 0;
-        }
-
-        private void GotoPrevious()
-        {
-            int index = Groups.IndexOf(SelectedGroup);
-            SelectedGroup = Groups[index - 1];
-        }
-
-
         private List<MatchViewModel> Matchs { get; set; }
+
+        #region Live
+        public ICommand LiveCommand => new RelayCommand(ShowLive);
+        private void ShowLive() { SimpleIoc.Default.GetInstance<IDialogService>().ShowMessageBox("Show live scores", "Live score"); }
+        #endregion
+
+        #region Model and stats
+
+        public ObservableCollection<GoalModelViewModel> GoalModels { get; set; }
+
+        private GoalModelViewModel _SelectedGoalModel;
+        public GoalModelViewModel SelectedGoalModel
+        {
+            get { return _SelectedGoalModel; }
+            set
+            {
+                _SelectedGoalModel = value;
+                RaisePropertyChanged(nameof(SelectedGoalModel));
+            }
+        }
+
+        #endregion
+
+        #region Groups
 
         public ObservableCollection<GroupViewModel> Groups { get; set; }
 
@@ -63,6 +75,36 @@ namespace FootballEstimate.ViewModel
                 RaisePropertyChanged(nameof(SelectedGroup));
             }
         }
+
+        public ICommand Previous => new RelayCommand(GotoPrevious, CanGotPrevious);
+
+        private bool CanGotPrevious()
+        {
+            return Groups.IndexOf(SelectedGroup) > 0;
+        }
+
+        private void GotoPrevious()
+        {
+            int index = Groups.IndexOf(SelectedGroup);
+            SelectedGroup = Groups[index - 1];
+        }
+
+        public ICommand Next => new RelayCommand(GotoNext, CanGoNext);
+
+        private bool CanGoNext()
+        {
+            return Groups.IndexOf(SelectedGroup) < Groups.Count-1;
+        }
+
+        private void GotoNext()
+        {
+            int index = Groups.IndexOf(SelectedGroup);
+            SelectedGroup = Groups[index + 1];
+        }
+
+        #endregion
+
+        #region matchs for Group
 
         private ObservableCollection<MatchViewModel> _MatchsOfGroup;
         public ObservableCollection<MatchViewModel> MatchsOfGroup
@@ -86,7 +128,8 @@ namespace FootballEstimate.ViewModel
             }
         }
 
-        
+        #endregion
+
         public override void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.RaisePropertyChanged(propertyName);
