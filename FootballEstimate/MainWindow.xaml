@@ -34,8 +34,6 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <!--<userView:TabItemControl DataContext="{Binding ContentViewModel}"></userView:TabItemControl>-->
-
                     <ContentControl Content="{Binding Path=ContentViewModel}">
                         <ContentControl.Resources>
                             <DataTemplate DataType="{x:Type viewModel:LeaguesViewModel}" >
