@@ -31,7 +31,7 @@ namespace FootballEstimate.ViewModel
             }
         }
 
-        public async void LoadTeamsAsync(LeagueViewModel league)
+        public async Task LoadTeamsAsync(LeagueViewModel league)
         {
             IEnumerable<Team> teams = league == null ? new Team[0]
                 : await _openLigaService.LoadTeamsAsync(league.LeagueKey, league.SeasonKey);

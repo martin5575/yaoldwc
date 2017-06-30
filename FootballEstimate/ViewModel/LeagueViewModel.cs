@@ -41,11 +41,13 @@ namespace FootballEstimate.ViewModel
         #endregion
 
         #region Buttons on Card
-        public ICommand LoadTeams => new RelayCommand(LoadTeamsAction);
+        public ICommand LoadTeams => new RelayCommand(LoadTeamsActionAsync);
 
-        private void LoadTeamsAction()
+        private async void LoadTeamsActionAsync()
         {
             var teamsViewModel = ServiceLocator.Current.GetInstance<TeamsOfLeagueViewModel>();
+            var task = teamsViewModel.LoadTeamsAsync(this);
+
             var label = $"Teams-{ShortDisplayName}";
             var tooltip = $"Teams of {LongDisplayName}";
             var tabViewModel = new TabItemViewModel(label, label, tooltip, teamsViewModel, true);
@@ -54,6 +56,8 @@ namespace FootballEstimate.ViewModel
                 ViewModel = tabViewModel,
                 Action = TabMessageAction.Create,
             };
+
+            await task;
             this.MessengerInstance.Send(tabMessage);
         }
 

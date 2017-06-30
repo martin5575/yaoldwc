@@ -34,6 +34,8 @@ namespace FootballEstimate.ViewModel
             .Where(x=>x.GroupID.HasValue)
             .OrderBy(x => x.GroupOrderID)
             .ForEach(season.Groups.Add);
+
+            season.SelectedGroup = season.Groups.FirstOrDefault();
             return season;
         }
 
