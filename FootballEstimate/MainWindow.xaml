@@ -45,6 +45,9 @@
                             <DataTemplate DataType="{x:Type viewModel:TeamsOfLeagueViewModel}">
                                 <userView:TeamsControl></userView:TeamsControl>
                             </DataTemplate>
+                            <DataTemplate DataType="{x:Type viewModel:StatsViewModel}">
+                                <userView:StatsControl></userView:StatsControl>
+                            </DataTemplate>
                         </ContentControl.Resources>
                     </ContentControl>
                 </DataTemplate>

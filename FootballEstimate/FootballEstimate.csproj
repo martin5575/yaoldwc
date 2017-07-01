@@ -81,8 +81,10 @@
     </ApplicationDefinition>
     <Compile Include="DesignModel\LeagueAndSeasonInfoServiceDesign.cs" />
     <Compile Include="DesignModel\OpenLigaServiceDesign.cs" />
+    <Compile Include="Model\Data\TeamStats.cs" />
     <Compile Include="Model\Data\ThreeLetterCode.cs" />
     <Compile Include="Model\ILeagueAndSeasonInfoService.cs" />
+    <Compile Include="Model\IStatsAndProbService.cs" />
     <Compile Include="Model\OpenLiga\Constants.cs" />
     <Compile Include="Model\IOpenLigaService.cs" />
     <Compile Include="Model\OpenLiga\Loader\IconLoader.cs" />
@@ -97,6 +99,10 @@
     <Compile Include="Model\OpenLiga\OpenLigaService.cs" />
     <Compile Include="Model\SettingsReader.cs" />
     <Compile Include="Model\OpenLiga\Loader\TeamLoader.cs" />
+    <Compile Include="Model\StatsAndProbs\StatsAndProbService.cs" />
+    <Compile Include="Model\StatsAndProbs\TeamScores.cs" />
+    <Compile Include="Model\StatsAndProbs\TeamStatsCalculator.cs" />
+    <Compile Include="ValueConverter\DoubleConverter.cs" />
     <Compile Include="ValueConverter\DateTimeConverter.cs" />
     <Compile Include="ValueConverter\TeamImageConverter.cs" />
     <Compile Include="ViewModel\GoalModelViewModel.cs" />
@@ -109,6 +115,8 @@
     <Compile Include="ViewModel\Messages\TabMessage.cs" />
     <Compile Include="ViewModel\LeagueViewModel.cs" />
     <Compile Include="ViewModel\SeasonViewModel.cs" />
+    <Compile Include="ViewModel\StatsByTeamViewModel.cs" />
+    <Compile Include="ViewModel\StatsViewModel.cs" />
     <Compile Include="ViewModel\TabItemViewModel.cs" />
     <Compile Include="ViewModel\TeamsOfLeagueViewModel.cs" />
     <Compile Include="ViewModel\TeamViewModel.cs" />
@@ -144,6 +152,9 @@
     <Compile Include="View\Service\Interface\IModalDialogService.cs" />
     <Compile Include="View\Service\Implementation\NavigationService.cs" />
     <Compile Include="View\Service\Implementation\ModalDialogService.cs" />
+    <Compile Include="View\StatsControl.xaml.cs">
+      <DependentUpon>StatsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TeamControl.xaml.cs">
       <DependentUpon>TeamControl.xaml</DependentUpon>
     </Compile>
@@ -200,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SeasonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StatsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

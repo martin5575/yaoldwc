@@ -87,7 +87,7 @@ namespace FootballEstimate.ViewModel
             var league = this;
             var matchs = await _openLigaService.LoadMatchesAsync(league.LeagueKey, league.SeasonKey);
             var matchViewModels = MatchViewModel.FromMatchs(matchs);
-            var seasonViewModel = SeasonViewModel.From(matchViewModels);
+            var seasonViewModel = SeasonViewModel.From(matchViewModels, league.LeagueKey, league.SeasonKey);
             var tabViewModel = new TabItemViewModel(league.ShortDisplayName,
                 league.ShortDisplayName, league.LongDisplayName,
                 seasonViewModel, true);

@@ -15,6 +15,7 @@
 using FootballEstimate.DesignModel;
 using FootballEstimate.Model;
 using FootballEstimate.Model.OpenLiga;
+using FootballEstimate.Model.StatsAndProbs;
 using FootballEstimate.View.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -50,6 +51,8 @@ namespace FootballEstimate.ViewModel
                 SimpleIoc.Default.Register<ILeagueAndSeasonInfoService>(()=> LeagueAndSeasonInfoService.Instance);
             }
 
+            SimpleIoc.Default.Register<IStatsAndProbService, StatsAndProbService>();
+
             SimpleIoc.Default.Register<IModalDialogService, ModalDialogService>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<INavigationService, View.Service.NavigationService>();
@@ -63,6 +66,8 @@ namespace FootballEstimate.ViewModel
             SimpleIoc.Default.Register<SeasonViewModel>();
             SimpleIoc.Default.Register<TeamViewModel>();
             SimpleIoc.Default.Register<TeamsOfLeagueViewModel>();
+            SimpleIoc.Default.Register<StatsByTeamViewModel>();
+            SimpleIoc.Default.Register<StatsViewModel>();
         }
 
         public MainViewModel Main

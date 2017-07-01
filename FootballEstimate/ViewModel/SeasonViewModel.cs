@@ -11,6 +11,8 @@ using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
+using FootballEstimate.ViewModel.Messages;
+using Microsoft.Practices.ServiceLocation;
 
 namespace FootballEstimate.ViewModel
 {
@@ -22,11 +24,16 @@ namespace FootballEstimate.ViewModel
             MatchsOfGroup = new ObservableCollection<MatchViewModel>();
         }
 
-        public static SeasonViewModel From(IEnumerable<MatchViewModel> matchViewModels)
+        private string _leagueKey;
+        private string _seasonKey;
+
+        public static SeasonViewModel From(IEnumerable<MatchViewModel> matchViewModels, string leagueKey, string seasonKey)
         {
             var season = new SeasonViewModel
             {
                 Matchs = matchViewModels.ToList(),
+                _leagueKey = leagueKey,
+                _seasonKey = seasonKey
             };
 
             matchViewModels.Select(x => x.Group)
@@ -46,7 +53,28 @@ namespace FootballEstimate.ViewModel
         private void ShowLive() { SimpleIoc.Default.GetInstance<IDialogService>().ShowMessageBox("Show live scores", "Live score"); }
         #endregion
 
-        #region Model and stats
+        #region Stats
+        public ICommand StatsCommand => new RelayCommand(ShowStatsAsync);
+        private async void ShowStatsAsync()
+        {
+            var statsViewModel = ServiceLocator.Current.GetInstance<StatsViewModel>();
+            var task = statsViewModel.CalulateForAsync(_leagueKey, _seasonKey);
+            string caption = $"stats-{_leagueKey}-{_seasonKey}";
+            string tooltip = "Stats for season ...";
+            var tabViewModel = new TabItemViewModel(caption, caption, tooltip, statsViewModel);
+
+            var message = new TabMessage
+            {
+               Action = TabMessageAction.Create,
+               ViewModel = tabViewModel, 
+            };
+            await task;
+            this.MessengerInstance.Send(message);
+        }
+        #endregion
+
+
+        #region Model and probs
 
         public ObservableCollection<GoalModelViewModel> GoalModels { get; set; }
 
