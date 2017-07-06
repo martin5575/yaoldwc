@@ -16,6 +16,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./Styles.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Themes/Metro/Metro.MSControls.Core.Implicit.xaml" />
+                <ResourceDictionary Source="Themes/Metro/Metro.MSControls.Toolkit.Implicit.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converter:TeamImageConverter x:Key="teamImageConverter"/>
         </ResourceDictionary>
@@ -27,8 +29,8 @@
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" ToolTip="{Binding Path=ToolTip, Mode=OneTime}">
-                        <TextBlock Text="{Binding Path=Caption, Mode=OneWay}"/>
-                        <Button Content="X" Command="{Binding CloseCommand, Mode=OneTime}" IsEnabled="{Binding CanClose}" Width="15" Height="15" Margin="2,2,2,2" />
+                        <TextBlock Text="{Binding Path=Caption, Mode=OneWay}" Style="{StaticResource TextBlockStyle}"/>
+                        <Button Content="X" Command="{Binding CloseCommand, Mode=OneTime}" IsEnabled="{Binding CanClose}" Width="10" Height="10" Margin="2,2,2,2" />
                     </StackPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>

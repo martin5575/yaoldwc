@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="300"
              >
-    <Grid Background="#FFE5E5E5">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="60*"></RowDefinition> 
         </Grid.RowDefinitions>
-        <Button x:Name="buttonAdd" Content="+" Command="{Binding AddSeason}"
-        	                HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="20"/>
+        <Button x:Name="buttonAdd" Content="+" Command="{Binding AddSeason}" 
+        	                HorizontalAlignment="Left" Margin="5,2,0,0" VerticalAlignment="Top" Width="20"/>
      
         <ListBox Grid.Row="1" ItemsSource="{Binding Leagues}" SelectedItem="{Binding SelectedLeague}" 
                         Margin="2,2,2,2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"

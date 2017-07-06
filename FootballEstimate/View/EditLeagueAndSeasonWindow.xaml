@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FootballEstimate.View"
         mc:Ignorable="d"
-        Title="Add League And Season" Height="165" Width="460"
+        Title="Add League And Season" Height="142.965" Width="460"
         WindowStyle="SingleBorderWindow" Background="White"
         DataContext="{Binding SeasonLeagueForDesign, Source={StaticResource Locator}}">
-    <Grid>
+    <Grid Margin="0,0,0,0.394">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60"/>
             <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="100*"/>
             <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="187*"/>
             <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -22,21 +22,21 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <Label x:Name="labelLeague" Content="League" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Black"/>
-        <Label x:Name="labelLeagueKey" Content="Key*" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox x:Name="textBoxLeagueKey" Grid.Column="2" Grid.Row="0" Text="{Binding LeagueKey, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" />
-        <Label x:Name="labelLeagueName" Content="Name" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <TextBox x:Name="textBoxLeagueName" Grid.Column="4" Grid.Row="0" Text="{Binding LeagueName, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" />
-        <Label x:Name="labelSeason" Content="Season" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Black"/>
-        <Label x:Name="labelSeasonKey" Content="Key*" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox x:Name="textBoxSeasonKey" Grid.Column="2" Grid.Row="1" Text="{Binding SeasonKey, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" />
-        <Label x:Name="labelSeasonName" Content="Name" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxSeasonName" Text="{Binding SeasonName, Mode=TwoWay}" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" />
+        <Label x:Name="labelLeague" Content="League" Grid.Column="0" Grid.Row="0" FontWeight="Black" Margin="0,2.02,8.733,2.02" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <Label x:Name="labelLeagueKey" Content="Key*" Grid.Column="1" Grid.Row="0" Margin="0,2.02,16.953,2.02" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <TextBox x:Name="textBoxLeagueKey" Grid.Column="2" Grid.Row="0" Text="{Binding LeagueKey, Mode=TwoWay}" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="0,3.5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+        <Label x:Name="labelLeagueName" Content="Name" Grid.Column="3" Grid.Row="0" Margin="0,2.02,8.303,2.02" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+        <TextBox x:Name="textBoxLeagueName" Grid.Column="4" Grid.Row="0" Text="{Binding LeagueName, Mode=TwoWay}" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="0,3.5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+        <Label x:Name="labelSeason" Content="Season" Grid.Column="0" Grid.Row="1" FontWeight="Black" Margin="0,2.02,9.447,2.02" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <Label x:Name="labelSeasonKey" Content="Key*" Grid.Column="1" Grid.Row="1" Margin="0,2.02,16.953,2.02" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <TextBox x:Name="textBoxSeasonKey" Grid.Column="2" Grid.Row="1" Text="{Binding SeasonKey, Mode=TwoWay}" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="0,3.5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+        <Label x:Name="labelSeasonName" Content="Name" Grid.Column="3" Grid.Row="1" Margin="0,0,8.303,4.04" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+        <TextBox x:Name="textBoxSeasonName" Text="{Binding SeasonName, Mode=TwoWay}" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="0,3.5" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
 
         <Button x:Name="buttonOK" Content="OK" IsDefault="True" Command="{Binding OkCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
-                Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Width="70" Margin="0,0,75,0"/>
+                Grid.Column="4" Grid.Row="2" Margin="42,17.53,75,17.47" d:LayoutOverrides="LeftMargin, RightMargin"/>
         <Button x:Name="buttonCancel" Content="Cancel" IsCancel="True" 
-                Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" Height="25" VerticalAlignment="Bottom" Width="70" />
+                Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" Width="70" d:LayoutOverrides="LeftMargin, RightMargin" Margin="0,17.53,0,17.47" />
 
     </Grid>
 </Window>

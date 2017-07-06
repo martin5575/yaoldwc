@@ -4,47 +4,75 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FootballEstimate.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="600"
+             mc:Ignorable="d"
              d:DataContext="{Binding SeasonLeagueForDesign,Source={StaticResource Locator}}"
-             Height="50">
+             Height="60" Width="604.106">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Themes/Metro/Metro.MSControls.Core.Implicit.xaml" />
+                <ResourceDictionary Source="../Themes/Metro/Metro.MSControls.Toolkit.Implicit.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200*"></ColumnDefinition>
-            <ColumnDefinition Width="200*"></ColumnDefinition>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="100*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="{Binding Path=LongDisplayName}" FontWeight="Black" VerticalAlignment="Stretch" Height="30"></Label>
-        <Grid Grid.Row="0" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-            </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="{Binding Path=LongDisplayName}" HorizontalAlignment="Left" FontWeight="ExtraBold" 
+               VerticalAlignment="Stretch" Margin="0,0,0,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" />
+
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="65"></ColumnDefinition>
-                <ColumnDefinition Width="100*"></ColumnDefinition>
-                <ColumnDefinition Width="105"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content="League Id:"></Label>
             <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=LeagueKey}" FontWeight="Black"></Label>
-            <Label Grid.Row="1" Grid.Column="0" Content="Season Id:"></Label>
-            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=SeasonKey}" FontWeight="Black"></Label>
-            
-            <Button x:Name="buttonRemove" Content="Remove" Command="{Binding RemoveSeason}"
-                    Grid.Row="0" Grid.Column="2"
-        	        HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="50"/>
-            <Button x:Name="buttonEdit" Content="Edit" Command="{Binding EditSeason}"
-        	        Grid.Row="0" Grid.Column="2"        
-                    HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="50"/>
-            <Button x:Name="buttonOpen" Content="Open" Command="{Binding OpenSeason}"
-                    Grid.Row="1" Grid.Column="2"
-                    HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="50"/>
-            <Button x:Name="buttonTeams" Content="Teams" Command="{Binding LoadTeams}"
-                    Grid.Row="1" Grid.Column="2"
-                    HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="50"/>
+            <Label Grid.Row="0" Grid.Column="2" Content="Season Id:"></Label>
+            <Label Grid.Row="0" Grid.Column="3" Content="{Binding Path=SeasonKey}" FontWeight="Black"></Label>
+        </Grid>
+        
 
+        <Grid Grid.Row="0" Margin="0,0,0,0" Grid.Column="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="buttonEdit" Content="Edit" Command="{Binding EditSeason}" Style="{DynamicResource HyperlinkLikeButton}" 
+        	        Grid.Row="1" VerticalAlignment="Bottom" Grid.Column="1" 
+                    d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            </Button>
+            <Button x:Name="buttonRemove" Content="Remove" Command="{Binding RemoveSeason}" Style="{DynamicResource HyperlinkLikeButton}"
+                    Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom" 
+                    d:LayoutOverrides="VerticalAlignment, LeftMargin, RightMargin, TopMargin, BottomMargin">
+            </Button>
+            <Button x:Name="buttonTeams" Content="Teams" Command="{Binding LoadTeams}" Style="{DynamicResource HyperlinkLikeButton}"
+                    Grid.Row="1" Grid.Column="3" VerticalAlignment="Bottom" 
+                    d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            </Button>
+            <Button x:Name="buttonOpen" Content="Open" Command="{Binding OpenSeason}" Style="{DynamicResource HyperlinkLikeButton}"
+                    Grid.Row="1" Grid.Column="4" VerticalAlignment="Bottom" 
+                    d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+            </Button>
         </Grid>
     </Grid>
 </UserControl>
